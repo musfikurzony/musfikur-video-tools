@@ -18,7 +18,7 @@
       <div class="nav-label">WORKSPACE</div>
       <nav class="nav">
         <a class="nav-item active" href="#dashboard"><span class="nav-icon">⌂</span> Dashboard</a>
-        <a class="nav-item disabled" href="#video-info" aria-disabled="true"><span class="nav-icon">▣</span> Video Information <em>Later</em></a>
+        <a class="nav-item" href="#video-info"><span class="nav-icon">▣</span> Video Information</a>
         <a class="nav-item disabled" href="#transcript" aria-disabled="true"><span class="nav-icon">≡</span> Transcript Extractor <em>Later</em></a>
         <a class="nav-item disabled" href="#script" aria-disabled="true"><span class="nav-icon">✧</span> AI Script Generator <em>Later</em></a>
         <a class="nav-item disabled" href="#downloader" aria-disabled="true"><span class="nav-icon">↓</span> Video Downloader <em>Later</em></a>
@@ -26,8 +26,8 @@
       </nav>
       <div class="sidebar-bottom">
         <div class="status-dot"></div>
-        <div><strong>Stage 1</strong><small>Interface preview</small></div>
-        <span class="version">v0.1</span>
+        <div><strong>Stage 2</strong><small>Video information</small></div>
+        <span class="version">v0.2</span>
       </div>
     </aside>
 
@@ -43,27 +43,41 @@
           <div>
             <p class="eyebrow">YOUR VIDEO WORKSPACE</p>
             <h1>Good day. What are we working on?</h1>
-            <p class="subheading">A simple place to organize video information, transcripts and authorized media tasks.</p>
+            <p class="subheading">Look up public YouTube video information, then organize permitted transcript and media tasks.</p>
           </div>
-          <div class="date-chip"><span class="date-icon">▦</span> Stage 1 preview</div>
+          <div class="date-chip"><span class="date-icon">▦</span> Stage 2 active</div>
         </div>
 
-        <section class="hero-card">
+        <section class="hero-card" id="video-info">
           <div class="hero-copy">
-            <span class="step-pill">GET STARTED</span>
-            <h2>Paste a video link</h2>
-            <p>Start with a public video URL. This first release checks the link format only; it does not fetch or download the video yet.</p>
+            <span class="step-pill">VIDEO INFORMATION</span>
+            <h2>Paste a YouTube link</h2>
+            <p>Retrieve publicly available video details using the YouTube Data API. This feature does not download the video.</p>
           </div>
           <form id="urlForm" class="url-form" novalidate>
-            <label for="videoUrl">VIDEO URL</label>
+            <label for="videoUrl">YOUTUBE VIDEO URL</label>
             <div class="input-row">
               <span class="link-symbol">↗</span>
-              <input id="videoUrl" name="videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="url">
-              <button type="submit" class="primary-button">Check link <span>→</span></button>
+              <input id="videoUrl" name="videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="url" required>
+              <button type="submit" class="primary-button" id="lookupButton">Get information <span>→</span></button>
             </div>
-            <p class="form-hint" id="formMessage" role="status">Supported link formats will be expanded in a later stage.</p>
+            <p class="form-hint" id="formMessage" role="status">Paste a public YouTube video link to begin.</p>
           </form>
           <div class="hero-decoration" aria-hidden="true"><div class="ring ring-one"></div><div class="ring ring-two"></div><div class="play-mark">▶</div></div>
+        </section>
+
+        <section class="video-result" id="videoResult" hidden aria-live="polite">
+          <div class="result-heading"><div><p class="eyebrow">LOOKUP RESULT</p><h2>Video information</h2></div><span class="tool-status active-status">FOUND</span></div>
+          <div class="video-result-layout">
+            <img id="videoThumbnail" class="video-thumbnail" alt="YouTube video thumbnail">
+            <div class="video-details">
+              <h3 id="videoTitle"></h3>
+              <p class="channel-line" id="videoChannel"></p>
+              <p class="description" id="videoDescription"></p>
+              <p class="published-line" id="videoPublished"></p>
+              <a id="videoOpen" class="video-open" href="#" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+            </div>
+          </div>
         </section>
 
         <div class="section-heading">
@@ -73,9 +87,9 @@
 
         <section class="tool-grid">
           <article class="tool-card">
-            <div class="tool-icon green">▣</div><span class="tool-status planned">PLANNED</span>
-            <h3>Video information</h3><p>View video title, channel, thumbnail and available details.</p>
-            <span class="card-footer">Coming in Stage 2 <b>↗</b></span>
+            <div class="tool-icon green">▣</div><span class="tool-status active-status">ACTIVE</span>
+            <h3>Video information</h3><p>View public video title, channel, thumbnail and available details.</p>
+            <span class="card-footer">Stage 2 <b>✓</b></span>
           </article>
           <article class="tool-card">
             <div class="tool-icon blue">≡</div><span class="tool-status planned">PLANNED</span>

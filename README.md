@@ -1,48 +1,53 @@
-# Musfikur Video Tools — Stage 1
+# Musfikur Video Tools — Stage 2
 
-A static, responsive dashboard starter for Cloudflare Pages.
+This update adds public YouTube video information lookup to the existing Cloudflare Pages site.
 
-## What Stage 1 includes
+## Files and folders
 
-- Responsive dashboard for desktop and mobile
-- Video URL input with basic browser-side URL format validation
-- Planned feature cards for video information, transcripts, AI scripts and authorized downloads
-- No third-party scripts, ads, analytics, cookies, API keys or external dependencies
+- `public/` — website interface, styles and browser JavaScript
+- `functions/api/video.js` — server-side Cloudflare Pages Function for YouTube Data API
+- `.gitignore`
 
-## Important limitations
+## Before deploying
 
-Stage 1 is only the user interface. It does **not** fetch YouTube metadata, extract captions, generate AI scripts, or download videos. A valid-looking URL is not proof that the video is accessible or that downloading is permitted.
+In Cloudflare Pages, open the `musfikur-video-tools` project and confirm that `YOUTUBE_API_KEY` is saved as an **encrypted Secret** for the **Production** environment. Never put the key in any file in this repository.
 
-Only add download functionality for content you own or are authorized to download, and follow the relevant platform terms and copyright rules.
+## Deploy by updating the existing GitHub repository
 
-## Deploy to Cloudflare Pages using Git integration
+1. Download and extract this ZIP on your computer.
+2. Open the existing GitHub repository `musfikur-video-tools`.
+3. Replace the existing `public` folder with the `public` folder from this ZIP.
+4. Add the `functions` folder from this ZIP at the repository root (same level as `public`).
+5. Replace `.gitignore` if GitHub asks.
+6. Commit the changes to the `main` branch.
+7. Wait for Cloudflare Pages to finish the automatic production deployment.
+8. Open `https://musfikur-video-tools.pages.dev/`, paste a public YouTube video URL and click **Get information**.
 
-1. Create a GitHub repository named `musfikur-video-tools`.
-2. Upload the contents of this project to the repository root. The `public` folder must remain at the root.
-3. Sign in to the Cloudflare dashboard.
-4. Open **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
-5. Authorize GitHub if asked and select `musfikur-video-tools`.
-6. Configure the build:
-   - Production branch: `main`
-   - Framework preset: `None`
-   - Build command: leave blank
-   - Build output directory: `public`
-   - Root directory: `/` (default)
-7. Select **Save and Deploy**.
-8. When deployment finishes, open the generated `*.pages.dev` address.
+Important: the repository root must contain both `public/` and `functions/`. Do not put `functions/` inside `public/`.
 
-## Updating the website
+## Cloudflare Pages build settings
 
-Edit files in GitHub and commit the changes to `main`. Cloudflare Pages will automatically deploy the new version.
+Keep the existing settings:
+- Framework preset: None
+- Build command: blank
+- Build output directory: `public`
+- Root directory: `/`
 
-## Local preview (optional)
+Cloudflare Pages automatically detects the root-level `functions` directory when deploying from Git integration.
 
-You do not need to install anything on your office PC. For a local preview, any static HTTP server can serve the `public` directory. The deployed Pages site is the main test environment.
+## What this stage does
 
-## Suggested next stages
+- Supports standard YouTube watch links, youtu.be links, Shorts, embed and live URL formats.
+- Retrieves public title, channel, description, publication date and thumbnail.
+- Calls YouTube Data API from the server-side Pages Function.
+- Reads the encrypted `YOUTUBE_API_KEY` secret from the Production environment.
+- Does not download video or audio, bypass restrictions, or retrieve private videos.
 
-- Stage 2: secure metadata lookup through a server-side API
-- Stage 3: permitted transcript/caption retrieval
-- Stage 4: AI summary/script integration using a protected server-side API key
-- Stage 5: authorized media processing through a separate backend (for example, Cloudflare Containers on a suitable paid plan)
-- Stage 6: authentication, job history, retention controls and usage limits
+## Troubleshooting
+
+- **API key not configured**: confirm `YOUTUBE_API_KEY` is a Secret in the Production environment and redeploy.
+- **API request failed**: check that YouTube Data API v3 is enabled, the key is restricted to YouTube Data API v3, and the Google Cloud project has available quota.
+- **No public video information found**: the video may be private, removed, age/region restricted or otherwise unavailable through the API.
+- **Function not found / 404 on `/api/video`**: confirm `functions/api/video.js` is at repository root, alongside `public`, then commit and redeploy.
+
+Only download content you own or have permission to download, and follow applicable platform terms and copyright rules.
