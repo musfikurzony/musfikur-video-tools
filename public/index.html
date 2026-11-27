@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7faf8">
+  <title>Musfikur Video Tools</title>
+  <meta name="description" content="A clean workspace for video information, transcripts, summaries and authorized downloads.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="Musfikur Video Tools home">
+        <span class="brand-mark">MV</span>
+        <span><strong>Musfikur</strong><small>Video Tools</small></span>
+      </a>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav">
+        <a class="nav-item active" href="#dashboard"><span class="nav-icon">⌂</span> Dashboard</a>
+        <a class="nav-item disabled" href="#video-info" aria-disabled="true"><span class="nav-icon">▣</span> Video Information <em>Later</em></a>
+        <a class="nav-item disabled" href="#transcript" aria-disabled="true"><span class="nav-icon">≡</span> Transcript Extractor <em>Later</em></a>
+        <a class="nav-item disabled" href="#script" aria-disabled="true"><span class="nav-icon">✧</span> AI Script Generator <em>Later</em></a>
+        <a class="nav-item disabled" href="#downloader" aria-disabled="true"><span class="nav-icon">↓</span> Video Downloader <em>Later</em></a>
+        <a class="nav-item disabled" href="#history" aria-disabled="true"><span class="nav-icon">◷</span> History <em>Later</em></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="status-dot"></div>
+        <div><strong>Stage 1</strong><small>Interface preview</small></div>
+        <span class="version">v0.1</span>
+      </div>
+    </aside>
+
+    <main class="main" id="dashboard">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" aria-label="Toggle menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> Dashboard</div>
+        <div class="top-actions"><span class="secure-label">● Private workspace</span><div class="avatar">M</div></div>
+      </header>
+
+      <section class="content">
+        <div class="welcome-row">
+          <div>
+            <p class="eyebrow">YOUR VIDEO WORKSPACE</p>
+            <h1>Good day. What are we working on?</h1>
+            <p class="subheading">A simple place to organize video information, transcripts and authorized media tasks.</p>
+          </div>
+          <div class="date-chip"><span class="date-icon">▦</span> Stage 1 preview</div>
+        </div>
+
+        <section class="hero-card">
+          <div class="hero-copy">
+            <span class="step-pill">GET STARTED</span>
+            <h2>Paste a video link</h2>
+            <p>Start with a public video URL. This first release checks the link format only; it does not fetch or download the video yet.</p>
+          </div>
+          <form id="urlForm" class="url-form" novalidate>
+            <label for="videoUrl">VIDEO URL</label>
+            <div class="input-row">
+              <span class="link-symbol">↗</span>
+              <input id="videoUrl" name="videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="url">
+              <button type="submit" class="primary-button">Check link <span>→</span></button>
+            </div>
+            <p class="form-hint" id="formMessage" role="status">Supported link formats will be expanded in a later stage.</p>
+          </form>
+          <div class="hero-decoration" aria-hidden="true"><div class="ring ring-one"></div><div class="ring ring-two"></div><div class="play-mark">▶</div></div>
+        </section>
+
+        <div class="section-heading">
+          <div><h2>Tools overview</h2><p>Features will be enabled gradually.</p></div>
+          <span class="muted-count">4 MODULES</span>
+        </div>
+
+        <section class="tool-grid">
+          <article class="tool-card">
+            <div class="tool-icon green">▣</div><span class="tool-status planned">PLANNED</span>
+            <h3>Video information</h3><p>View video title, channel, thumbnail and available details.</p>
+            <span class="card-footer">Coming in Stage 2 <b>↗</b></span>
+          </article>
+          <article class="tool-card">
+            <div class="tool-icon blue">≡</div><span class="tool-status planned">PLANNED</span>
+            <h3>Transcript extractor</h3><p>Retrieve captions where available and where access is permitted.</p>
+            <span class="card-footer">Coming in Stage 3 <b>↗</b></span>
+          </article>
+          <article class="tool-card">
+            <div class="tool-icon violet">✧</div><span class="tool-status planned">PLANNED</span>
+            <h3>AI script generator</h3><p>Turn an authorized transcript into summaries and draft scripts.</p>
+            <span class="card-footer">Coming in Stage 4 <b>↗</b></span>
+          </article>
+          <article class="tool-card">
+            <div class="tool-icon amber">↓</div><span class="tool-status planned">PLANNED</span>
+            <h3>Authorized downloads</h3><p>Download media you own or have permission to save.</p>
+            <span class="card-footer">Backend decision pending <b>↗</b></span>
+          </article>
+        </section>
+
+        <section class="notice">
+          <div class="notice-icon">i</div>
+          <div><strong>Built for a safer workflow</strong><p>We will not ask for your YouTube password, install browser extensions, or send your video links to unknown downloader websites. Download features will be added only with appropriate permissions and safeguards.</p></div>
+        </section>
+        <footer>© <span id="year"></span> Musfikur Video Tools <span>·</span> Built on Cloudflare Pages</footer>
+      </section>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
